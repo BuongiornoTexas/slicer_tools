@@ -12,9 +12,9 @@ from pathlib import Path
 from sys import platform
 from typing import cast, NamedTuple, Generator
 
-from supporting import AllNodeSettings, NodeMetadata, PresetGroup, PresetType
-from supporting import SettingsDict
-from supporting import FROM, INHERITS, NAME, DEFAULT_ENCODING
+from slicer_common import AllNodeSettings, NodeMetadata, PresetGroup, PresetType
+from slicer_common import SettingsDict
+from slicer_common import FROM, INHERITS, NAME, DEFAULT_ENCODING
 
 
 class PresetPath(NamedTuple):
@@ -418,6 +418,18 @@ class ProjectPresets:
                 f" and reference node '{ref_node}'"
             )
 
+        if ref_group:
+            # A bit messy - the preset may not inherit from the ref_group, but if so,
+            # should inherit from its parents. So we build a check set for all possible
+            # reference groups.
+            include = False
+            ref_set = []
+            for group in PresetGroup:
+                if ref_group == group:
+                    include = True
+                if include:
+                    ref_set.append(group)
+
         # Unfortunately because of the way python dictionary unions work (keep
         # rightmost value), we need to walk the tree first and then build the
         # return dictionaries with union assignment |= from the root back to the
@@ -444,7 +456,7 @@ class ProjectPresets:
             # be assigned directly to the reference settings if it is in the reference
             # group.
             if not ref_metadata and (
-                (ref_group and this_node.metadata.group == ref_group)
+                (ref_group and this_node.metadata.group in ref_set)
                 or (this_node.metadata.name == ref_node)
             ):
                 # This is either the youngest ancestor in reference group, or this is
