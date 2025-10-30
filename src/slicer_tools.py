@@ -49,6 +49,7 @@ from openpyxl import Workbook  # type: ignore[import-untyped]
 from slicer_common import AllNodeSettings, NodeMetadata, PresetType, PresetGroup
 from slicer_common import SettingsDict, SettingValue
 from slicer_common import FROM, INHERITS, NAME, DEFAULT_ENCODING
+from slicer_common import choose
 from slicer_presets import ProjectPresets
 
 # Navigation and file name components
@@ -842,8 +843,47 @@ def presets_to_xlsx(cl_args: Namespace) -> None:
 
 
 def dump_json(cl_args: Namespace) -> None:
-    """Write full preset json file."""
-    pass
+    """Export settings from preset(s) in .3mf file."""
+    filepath = Path(cl_args.source).resolve()
+    this_3mf = ThreeMFPresets(filepath)
+
+    selection = choose(
+        options=[preset_type.value for preset_type in PresetType],
+        header=(
+            "Select the preset type you want to export."
+        ),
+        allow_multi=False,
+        no_action="Return without exporting.",
+    )
+
+    if not selection:
+        return
+
+    preset_type = PresetType(selection[0])
+    names = this_3mf.presets.preset_names(preset_type)
+
+    selection = choose(
+        names,
+        header=(
+            "\nEnter one or more comma separated numbers to choose the presets"
+            "\nthat you want to export. E.g. 1, 3, 5<Enter>. Filenames will be"
+            "\nthe preset name with '.json' suffix. Refer package documentation"
+            "\nfor explanation of override naming (random letters on end of names)."
+        ),
+        allow_multi=True,
+        no_action="Return without exporting.",
+    )
+
+    if not selection:
+        return
+
+    working = filepath.parent
+    for name in selection:
+        settings = this_3mf.presets.all_node_settings(preset_type, name)
+        filepath = working / (name + ".json")
+
+        with open(filepath, "w", encoding=DEFAULT_ENCODING) as fp:
+            json.dump(settings.source_subtree, fp)
 
 
 def get_parser() -> ArgumentParser:
@@ -876,24 +916,36 @@ def get_parser() -> ArgumentParser:
         default="preset_diffs",
     )
 
-    parser_diff.add_argument(
-        "--ref",
-        help=(
-            "Name of the reference group for differencing"
-            " (`system` | `user` | `project`)."
-            " Defaults to `system`. System is robust, others are untested and should"
-            " be used with extreme caution (I recommend only using system)."
-        ),
-        type=PresetGroup,
-        default=PresetGroup.SYSTEM,
-    )
+    # Ended up deciding that I don't trust anything other than system, so removed
+    # this capability altogether.
+    # parser_diff.add_argument(
+    #    "--ref",
+    #    help=(
+    #        "Name of the reference group for differencing"
+    #        " (`system` | `user` | `project`)."
+    #        " Defaults to `system`. 'system' is robust, others are untested and should"
+    #        " be used with extreme caution (I recommend only using system)."
+    #    ),
+    #    type=PresetGroup,
+    #    default=PresetGroup.SYSTEM,
+    # )
+    parser_diff.set_defaults(ref=PresetGroup.SYSTEM)
 
     parser_diff.set_defaults(func=presets_to_xlsx)
 
     parser_dump = subparsers.add_parser(
-        "dump", description="Dump json for one preset in source file."
+        "export",
+        description=(
+            "Export json for one or more presets from a file. An interactive menu"
+            " system will guide you through selecting preset type and preset names"
+            " for export."
+        ),
     )
 
+    parser_dump.add_argument(
+        "source",
+        help=("Specify a source .3mf file."),
+    )
 
     parser_dump.set_defaults(func=dump_json)
 

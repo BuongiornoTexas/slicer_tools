@@ -527,3 +527,12 @@ class ProjectPresets:
                 ref_group=reference_group,
                 ref_node=reference_node,
             )
+
+    def preset_names(self, preset_type: PresetType) -> tuple[str]:
+        """Return the list of names of the project presets of the specified type."""
+        name_list: tuple[str] = cast(tuple[str], tuple(
+            # pylint: disable-next=consider-iterating-dictionary
+            x.preset_name for x in self._project_nodes.keys() if x.type == preset_type
+        ))
+
+        return name_list
