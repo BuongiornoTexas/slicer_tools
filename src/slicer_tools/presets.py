@@ -12,9 +12,9 @@ from pathlib import Path
 from sys import platform
 from typing import cast, NamedTuple, Generator
 
-from slicer_common import AllNodeSettings, NodeMetadata, PresetGroup, PresetType
-from slicer_common import SettingsDict
-from slicer_common import FROM, INHERITS, NAME, DEFAULT_ENCODING
+from slicer_tools.common import AllNodeSettings, NodeMetadata, PresetGroup, PresetType
+from slicer_tools.common import SettingsDict
+from slicer_tools.common import FROM, INHERITS, NAME, DEFAULT_ENCODING
 
 
 class PresetPath(NamedTuple):

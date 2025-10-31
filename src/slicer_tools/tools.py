@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # cspell:ignore Bambu Fiberon Prusa
-# TODO: Implement command line functions.
 # TODO: Add special types to formatting (name, inherits, etc.) - also make version
 # xx.xx.xx.xx. Document all of this.
 # TODO: INCLUDE HUGE WARNING ABOUT INHERITING FROM USER DEFINED BASE TYPES (I
 # create these as system types - they are very much not - see _user_base_fix).
-# TODO: Raise an issue about duplicate Fiberon presets.
 # TODO: Document that differencing is only reliable for system group. Others are
 # untested.
 """Quick and dirty  tools for reading and comparing Bambu Studio slicer presets.
@@ -46,11 +44,11 @@ from pathlib import Path
 
 from openpyxl import Workbook  # type: ignore[import-untyped]
 
-from slicer_common import AllNodeSettings, NodeMetadata, PresetType, PresetGroup
-from slicer_common import SettingsDict, SettingValue
-from slicer_common import FROM, INHERITS, NAME, DEFAULT_ENCODING
-from slicer_common import choose
-from slicer_presets import ProjectPresets
+from slicer_tools.common import AllNodeSettings, NodeMetadata, PresetType, PresetGroup
+from slicer_tools.common import SettingsDict, SettingValue
+from slicer_tools.common import FROM, INHERITS, NAME, DEFAULT_ENCODING
+from slicer_tools.common import choose
+from slicer_tools.presets import ProjectPresets
 
 # Navigation and file name components
 THREE_MF_FOLDER = "./3MF"
