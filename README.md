@@ -30,8 +30,49 @@ Two options:
 
 - Install the package from pip: `pip install slicer_tools`.
 
+To run, fire up a command or terminal window and run `slicer_tools.exe`, or to run from the python package, use `py -m slicer_tools.tools`. The rest of the docs use `slicer_tools.exe`, but feel free to use the python version if you want very slightly faster output (or if you are on a non-windows platform).  
 
 # Usage
+
+## Differences
+
+To generate preset differences for a single file, run:
+
+`slicer_tools diff --source <path to 3mf file> --output <output file>`
+
+The output file is optional and defaults to `preset_diffs.xlsx`, and will be created in the same folder as the input file.
+
+To generate preset differences for all `.3mf` files in a folder, run:
+
+`slicer_tools diff --source <path to folder> --output <output file>`
+
+Both source and output are optional for this mode. If source is skipped, the difference will be performed on the working directory, and if output is skipped, the output is written to `preset_diffs.xlsx`.
+
+For help, run `slicer_tools diff -h`.
+
+See [Difference File Structure](#difference-file-structure) for details and cautions on using the output file.
+
+## Preset Export
+
+To generate one or more complete presets from a single file, each in `.json` format, run:
+
+`slicer_tools export <path to file name>`
+
+The slicer tools will then guide you through selecting the preset type you want to export and allow you to choose one or more presets of that type for export.
+
+As I've needed to do some hacks for generating differences, please read the **WARNINGS** in the following section, as the exported files may not perfectly match the structure used internally by BambuStudio (they work well enough for the purposes of creating new presets, and I've run out of patience to deal with the special cases). The warnings about the following special fields are relevant:
+
+- `name` and `<type>_settings_id`.
+- `inherits`.
+- `from`.
+- `version`. 
+
+If you plan to use any of these fields, please cross check against the original preset file. 
+
+All other fields should be consistent with the original files and inheritance trees.
+
+# Difference File Structure
+
 
 # Workflow for Creating New Presets
 
