@@ -1,0 +1,59 @@
+{
+    "bottom_shell_layers": "4",
+    "bridge_speed": [
+        "30"
+    ],
+    "default_acceleration": [
+        "5000"
+    ],
+    "from": "User",
+    "gap_infill_speed": [
+        "30"
+    ],
+    "inherits": "0.20mm Standard @BBL X1C",
+    "initial_layer_infill_speed": [
+        "30"
+    ],
+    "initial_layer_speed": [
+        "30"
+    ],
+    "initial_layer_travel_acceleration": [
+        "3000"
+    ],
+    "inner_wall_speed": [
+        "30"
+    ],
+    "internal_solid_infill_speed": [
+        "30"
+    ],
+    "name": "0.20mm Standard for Jayo TPU @BBL X1C",
+    "outer_wall_acceleration": [
+        "3000"
+    ],
+    "outer_wall_speed": [
+        "30"
+    ],
+    "overhang_2_4_speed": [
+        "30"
+    ],
+    "print_extruder_id": [
+        "1"
+    ],
+    "print_extruder_variant": [
+        "Direct Drive Standard"
+    ],
+    "print_settings_id": "0.20mm Standard for Jayo TPU @BBL X1C",
+    "sparse_infill_speed": [
+        "30"
+    ],
+    "support_speed": [
+        "30"
+    ],
+    "top_surface_speed": [
+        "30"
+    ],
+    "travel_acceleration": [
+        "5000"
+    ],
+    "version": "2.2.0.4"
+}

@@ -1,0 +1,12 @@
+{
+    "filament_extruder_variant": [
+        "Direct Drive Standard"
+    ],
+    "filament_settings_id": [
+        "Generic TPU - Jayo Template"
+    ],
+    "from": "User",
+    "inherits": "Generic TPU",
+    "name": "Generic TPU - Jayo Template",
+    "version": "2.2.0.4"
+}
