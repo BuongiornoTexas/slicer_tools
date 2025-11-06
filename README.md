@@ -246,7 +246,10 @@ This process handles creating a preset containing internally correct *special* v
   
   4) Back inside Bambu Studio, **DELETE** the presets you created in step (2).
 
-I've included a filament and process template file in the examples folder to give an idea of the expected output.
+I've included filament and process template files in the
+[examples](https://github.com/BuongiornoTexas/slicer_tools/tree/main/examples) folder to
+give an idea of the expected output (`Generic TPU - Jayo Template.json` and `0.20mm
+Standard Jayo TPU Template @BBL X1C.json`).
 
 ## Create Preset File, Add New Fields
 
@@ -293,7 +296,6 @@ handling required is massively lower than the effort to get slicer tools to sort
 output format correctly, so I'm willing to live with it. If any one wants to pick up
 the automation torch, please go wild! (contributions happily accepted)
 
-
 ## Load and Test the Preset
 
 Import the preset(s) created in the previous steps back into Bambu Studio.
@@ -303,3 +305,37 @@ Finally use the slicer_tools utility (difference or export) or the slicer GUI co
 interface to check that your new preset settings match up with the settings you created
 above. You can also re-export your newly imported preset and check that all of the
 fields/settings are as expected.
+
+# Sample TPU Presets
+
+The slicer tools repository includes the following TPU
+[preset examples](https://github.com/BuongiornoTexas/slicer_tools/tree/main/examples) I
+developed using this package:
+
+- A process preset for generic TPU: `0.20mm Standard for Jayo TPU @BBL X1C.json`.
+- A filament preset for generic TPU: `Generic TPU High Quality.json`. 
+- A filament preset calibrated for Jayo TPU at my local ambient conditions (60%
+humidity, 13C): `Jayo TPU Flow Rate Calibrated.json`.
+
+To use these, you will need to import the process preset and one of the filament presets
+and use **both** of them together (the process preset is critical for extrusion speed
+control, and the same preset works with both filament presets).
+
+Again, the Jayo TPU filament preset is calibrated for my local ambient conditions. 
+I'd strongly calibrating your own filament by starting with the generic TPU preset
+(which uses the BambuLab `Generic TPU` settings for temperature, flow ratio and
+K-factor), and run the following calibrations for your own filament:
+- a temperature tower (I've had good success at 205C, but many TPU profiles run between
+220C and 240C, and depending on your filament this may be needed to ensure good layer
+adhesion (my TPU looks best at 190C, but I've needed to go a bit higher for strength at
+the cost of a small amount of stringing and slightly worse overhangs);
+- a flow calibration (0.931 flow ratio for my TPU); and
+- a pressure advance calibration (0.04 K-factor for me). 
+
+(If you do try my Jayo settings and don't get great results, I'd suggest bumping your
+nozzle temperatures as a first fix - also check the manufacturer temperature range.)
+
+If you want to try it out from BambuStudio directly, please see my demonstration model
+on [MakerWorld](https://makerworld.com/en/@user_18681024/profile) - if it's not live
+already, it will be uploaded shortly. The MakerWorld page has a bit more detail on the
+basis for the settings and a lot of photos. 
