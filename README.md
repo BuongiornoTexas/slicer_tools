@@ -4,6 +4,11 @@
 
 # slicer_tools
 
+**Note** pypi has rejected the slicer_tools package name as being too similar to an
+existing package. This package is available as `bambu_slicer_tools` on pypi. The
+documentation reflects this quirk where relevant.
+
+
 A library of python tools for working with 3D slicer files (.3mf). Currently the
 library supports Bambu Studio on the following very limited function set:
 - Comparison of printer presets across multiple files. Comparisons are presented
@@ -25,7 +30,8 @@ it is worth picking up to do more with.
 
 # Change Log
 
-From v0.9.0 is the first release, with limited feature set.
+- v0.9.0 is the first release, with limited feature set.
+- v0.9.1 changes the pypi package name to `bambu_slicer_tools` (annoyingly!).
 
 # Installation
 
@@ -34,12 +40,13 @@ Two options:
 - Download the Windows executable (created with pyinstaller) from the 
 [Releases](https://github.com/BuongiornoTexas/slicer_tools/releases) page.
 
-- Install the package from pip: `pip install slicer_tools`.
+- Install the package from pip: `pip install bambu_slicer_tools`.
 
 To run, fire up a command or terminal window and run `slicer_tools.exe`, or to run from
-the python package, use `py -m slicer_tools.tools`. The rest of the docs use
-`slicer_tools.exe`, but feel free to use the python version if you want very slightly
-faster output (or if you are on a non-windows platform).  
+the python package, use `py -m slicer_tools.tools` (Note: the module is `slicer_tools`,
+ not `bambu_slicer_tools`). The rest of the docs use `slicer_tools.exe`, but feel free
+ to use the python version if you want very slightly faster output (or if you are on a
+ non-windows platform).  
 
 # Usage
 

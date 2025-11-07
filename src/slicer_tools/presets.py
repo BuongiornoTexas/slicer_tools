@@ -2,7 +2,7 @@
 # cspell:ignore Bambu Fiberon
 """Container for slicer presets.
 
-See slicer_tools.py for more comprehensive documentation.
+See tools.py for more comprehensive documentation.
 """
 
 import json
