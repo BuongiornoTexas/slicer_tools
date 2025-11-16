@@ -1,5 +1,5 @@
 <!---
-# cspell: ignore Bambu, pyinstaller, BambuLab, Jayo
+# cspell: ignore Bambu, pyinstaller, BambuLab, Jayo, pypi
 ---> 
 
 # slicer_tools
@@ -343,6 +343,6 @@ the cost of a small amount of stringing and slightly worse overhangs);
 nozzle temperatures as a first fix - also check the manufacturer temperature range.)
 
 If you want to try it out from BambuStudio directly, please see my demonstration model
-on [MakerWorld](https://makerworld.com/en/@user_18681024/profile) - if it's not live
-already, it will be uploaded shortly. The MakerWorld page has a bit more detail on the
-basis for the settings and a lot of photos. 
+on [MakerWorld](https://makerworld.com/en/models/1974773-high-quality-tpu-preset-from-comparison-tool#profileId-2123766).
+The MakerWorld page has a bit more detail on the basis for the settings and a lot of
+photos. 

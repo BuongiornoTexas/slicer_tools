@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bambu_slicer_tools"
-version = "v0.9.1"
+version = "v0.9.2"
 authors = [
   {name="BuongiornoTexas"},
 ]
